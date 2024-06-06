@@ -1,9 +1,8 @@
-﻿using System;
-using System.IO;
+﻿
 using SharpCompress.Common;
-using SharpCompress.Reader;
+using SharpCompress.Readers;
 
-namespace Kae.Decompress
+namespace GordoSoft.DCompress
 {
     static class Program
     {
@@ -38,7 +37,7 @@ namespace Kae.Decompress
                     if (!reader.Entry.IsDirectory)
                     {
                         Console.WriteLine("Extracting {0} [{1} bytes]", reader.Entry.Key, reader.Entry.Size);
-                        reader.WriteEntryToDirectory(outputFolder, ExtractOptions.ExtractFullPath | ExtractOptions.Overwrite);
+                        reader.WriteEntryToDirectory(outputFolder, new ExtractionOptions { ExtractFullPath = true, Overwrite = true });
                     }
                 }
             }
@@ -46,7 +45,7 @@ namespace Kae.Decompress
 
         private static void DisplayUsage()
         {
-            Console.WriteLine("Kae.Decompress <filename> [<output folder>]");
+            Console.WriteLine("DCompress <filename> [<output folder>]");
             Console.WriteLine();
             Console.WriteLine("Notes:");
             Console.WriteLine("  If output folder is not specified, then the archive will be extracted in the current folder.");
